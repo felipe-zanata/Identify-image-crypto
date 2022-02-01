@@ -11,6 +11,7 @@ import time
 import sys
 import yaml
 
+# teste
 # Load config file.
 stream = open("config.yaml", 'r')
 c = yaml.safe_load(stream)
@@ -101,10 +102,6 @@ def show(rectangles, img = None):
     cv2.imshow('img',img)
     cv2.waitKey(0)
 
-
-
-
-
 def clickBtn(img, timeout=3, threshold = ct['default']):
     """Search for img in the scree, if found moves the cursor over it and clicks.
     Parameters:
@@ -132,7 +129,7 @@ def clickBtn(img, timeout=3, threshold = ct['default']):
 
     return False
 
-def printSreen():
+def printScreen():
     with mss.mss() as sct:
         monitor = sct.monitors[0]
         sct_img = np.array(sct.grab(monitor))
@@ -144,7 +141,7 @@ def printSreen():
 
 def positions(target, threshold=ct['default'],img = None):
     if img is None:
-        img = printSreen()
+        img = printScreen()
     result = cv2.matchTemplate(img,target,cv2.TM_CCOEFF_NORMED)
     w = target.shape[1]
     h = target.shape[0]
@@ -304,16 +301,16 @@ def login():
     if clickBtn(images['connect-wallet'], timeout = 10):
         logger('🎉 Connect wallet button detected, logging in!')
         login_attempts = login_attempts + 1
-        #TODO mto ele da erro e poco o botao n abre
+        #TODO mto ele da erro e poco o botão n abre
         # time.sleep(10)
 
     if clickBtn(images['select-wallet-2'], timeout=8):
-        # sometimes the sign popup appears imediately
+        # sometimes the sign popup appears immediately
         login_attempts = login_attempts + 1
         # print('sign button clicked')
         # print('{} login attempt'.format(login_attempts))
         if clickBtn(images['treasure-hunt-icon'], timeout = 15):
-            # print('sucessfully login, treasure hunt btn clicked')
+            # print('successfully login, treasure hunt btn clicked')
             login_attempts = 0
         return
         # click ok button
@@ -335,7 +332,7 @@ def login():
         # print('{} login attempt'.format(login_attempts))
         # time.sleep(25)
         if clickBtn(images['treasure-hunt-icon'], timeout=25):
-            # print('sucessfully login, treasure hunt btn clicked')
+            # print('successfully login, treasure hunt btn clicked')
             login_attempts = 0
         # time.sleep(15)
 
