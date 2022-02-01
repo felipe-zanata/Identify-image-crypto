@@ -11,8 +11,6 @@ import time
 import sys
 import yaml
 
-# teste
-#teste2
 # Load config file.
 stream = open("config.yaml", 'r')
 c = yaml.safe_load(stream)
@@ -376,10 +374,6 @@ def sendHeroesHome():
                 print ('hero working, not sending him home(no dark work button)')
         else:
             print('hero already home, or home full(no dark home button)')
-
-
-
-
 
 def refreshHeroes():
     logger('🏢 Search for heroes to work')
