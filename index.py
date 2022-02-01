@@ -10,7 +10,7 @@ import pyautogui
 import time
 import sys
 import yaml
-
+# teste
 # teste
 # Load config file.
 stream = open("config.yaml", 'r')
