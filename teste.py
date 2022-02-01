@@ -1,1 +1,0 @@
-print('Vem Super Lendário')
