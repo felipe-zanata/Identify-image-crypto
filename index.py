@@ -10,9 +10,7 @@ import pyautogui
 import time
 import sys
 import yaml
-# teste
-# teste
-# Load config file.
+
 stream = open("config.yaml", 'r')
 c = yaml.safe_load(stream)
 ct = c['threshold']
