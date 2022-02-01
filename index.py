@@ -12,6 +12,7 @@ import sys
 import yaml
 
 # teste
+#teste2
 # Load config file.
 stream = open("config.yaml", 'r')
 c = yaml.safe_load(stream)
@@ -432,8 +433,6 @@ def main():
     else:
         print('>>---> Home feature not enabled')
     print('\n')
-
-    print(cat)
     time.sleep(7)
     t = c['time_intervals']
 
