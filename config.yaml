@@ -71,21 +71,21 @@
     #
     # [pt_BR]
     # Valor padrão: 0.8
-    select_wallet_buttons: 0.7
+    select_wallet_buttons: 0.8
 
     # [en_US]
     # Default value: 0.9
     #
     # [pt_BR]
     # Valor padrão: 0.9
-    go_to_work_btn: 0.8
+    go_to_work_btn: 0.9
 
     # [en_US]
     # Default value: 0.9
     #
     # [pt_BR]
     # Valor padrão: 0.9
-    green_bar: 0.7
+    green_bar: 0.9
 
   home:
     enable: False
@@ -121,7 +121,7 @@
   #
   # [pt_BR]
   # Valor padrão: 200
-  click_and_drag_amount: 250
+  click_and_drag_amount: 200
 
   # [en_US]
   # Default value: green

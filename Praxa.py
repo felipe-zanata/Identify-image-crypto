@@ -162,12 +162,12 @@ def scroll():
         return
     x,y,w,h = commoms[len(commoms)-1]
 #
-    moveToWithRandomness(x,y,0.7)
+    moveToWithRandomness(x,y,0.5)
 
     if not c['use_click_and_drag_instead_of_scroll']:
         pyautogui.scroll(-c['scroll_size'])
     else:
-        pyautogui.dragRel(0,-c['click_and_drag_amount'],duration=0.5, button='left')
+        pyautogui.dragRel(0,-c['click_and_drag_amount'],duration=0.3, button='left')
 
 
 def clickButtons():
@@ -226,14 +226,14 @@ def clickGreenBarButtons():
     hero_clicks_cnt = 0
     for (x, y, w, h) in not_working_green_bars:
         # isWorking(y, buttons)
-        moveToWithRandomness(x+offset+(w/2),y+(h/2),1)
+        moveToWithRandomness(x+offset+(w/2),y+(h/2),0.5)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
         hero_clicks_cnt = hero_clicks_cnt + 1
-        if hero_clicks_cnt > 20:
+        if hero_clicks_cnt > 25:
             logger('⚠️ Too many hero clicks, try to increase the go_to_work_btn threshold')
-            return
+            return len(not_working_green_bars)
         #cv2.rectangle(sct_img, (x, y) , (x + w, y + h), (0,255,255),2)
     return len(not_working_green_bars)
 
@@ -425,7 +425,7 @@ def main():
     else:
         print('>>---> Home feature not enabled')
     print('\n')
-    time.sleep(7)
+    time.sleep(5)
     t = c['time_intervals']
 
     last = {

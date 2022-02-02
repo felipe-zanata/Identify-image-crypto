@@ -121,7 +121,7 @@ def clickBtn(img, timeout=3, threshold = ct['default']):
         x,y,w,h = matches[0]
         pos_click_x = x+w/2
         pos_click_y = y+h/2
-        moveToWithRandomness(pos_click_x,pos_click_y,1)
+        moveToWithRandomness(pos_click_x,pos_click_y,0.5)
         pyautogui.click()
         return True
 
@@ -162,19 +162,19 @@ def scroll():
         return
     x,y,w,h = commoms[len(commoms)-1]
 #
-    moveToWithRandomness(x,y,1)
+    moveToWithRandomness(x,y,0.5)
 
     if not c['use_click_and_drag_instead_of_scroll']:
         pyautogui.scroll(-c['scroll_size'])
     else:
-        pyautogui.dragRel(0,-c['click_and_drag_amount'],duration=1, button='left')
+        pyautogui.dragRel(0,-c['click_and_drag_amount'],duration=0.3, button='left')
 
 
 def clickButtons():
     buttons = positions(images['go-work'], threshold=ct['go_to_work_btn'])
     # print('buttons: {}'.format(len(buttons)))
     for (x, y, w, h) in buttons:
-        moveToWithRandomness(x+(w/2),y+(h/2),1)
+        moveToWithRandomness(x+(w/2),y+(h/2),0.5)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
@@ -206,7 +206,6 @@ def isWorking(bar, buttons):
     return True
 
 def clickGreenBarButtons():
-    # ele clicka nos q tao trabaiano mas axo q n importa
     offset = 140
 
     green_bars = positions(images['green-bar'], threshold=ct['green_bar'])
@@ -227,14 +226,14 @@ def clickGreenBarButtons():
     hero_clicks_cnt = 0
     for (x, y, w, h) in not_working_green_bars:
         # isWorking(y, buttons)
-        moveToWithRandomness(x+offset+(w/2),y+(h/2),1)
+        moveToWithRandomness(x+offset+(w/2),y+(h/2),0.5)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
         hero_clicks_cnt = hero_clicks_cnt + 1
-        if hero_clicks_cnt > 20:
+        if hero_clicks_cnt > 25:
             logger('⚠️ Too many hero clicks, try to increase the go_to_work_btn threshold')
-            return
+            return len(not_working_green_bars)
         #cv2.rectangle(sct_img, (x, y) , (x + w, y + h), (0,255,255),2)
     return len(not_working_green_bars)
 
@@ -252,7 +251,7 @@ def clickFullBarButtons():
         logger('👆 Clicking in %d heroes' % len(not_working_full_bars))
 
     for (x, y, w, h) in not_working_full_bars:
-        moveToWithRandomness(x+offset+(w/2),y+(h/2),1)
+        moveToWithRandomness(x+offset+(w/2),y+(h/2),0.5)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
@@ -426,7 +425,7 @@ def main():
     else:
         print('>>---> Home feature not enabled')
     print('\n')
-    time.sleep(7)
+    time.sleep(5)
     t = c['time_intervals']
 
     last = {
@@ -478,12 +477,4 @@ if __name__ == '__main__':
 
 
     main()
-
-
-#cv2.imshow('img',sct_img)
-#cv2.waitKey()
-
-# colocar o botao em pt
-# soh resetar posiçoes se n tiver clickado em newmap em x segundos
-
 
