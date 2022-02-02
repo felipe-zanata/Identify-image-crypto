@@ -11,6 +11,48 @@ import time
 import sys
 import yaml
 
+
+frogbomb = """
+
+    1111111111111111 11   1¶¶¶¶¶¶¶¶7   11111           
+    11111            1  ø¶¶7       ¶¶¶   111
+    111    ø¶¶¶¶¶¶¶1   ¶¶            ¶¶  111
+    11  1¶¶¶7     ø¶¶7 ¶              ¶¶  11                              $¶     ¶     ¶¢
+    1  ¶¶ø          1¶¶¶               ¶¶ 11                  ¶¶¶¶¶¶¶       ¶¢   ¶   ø¶
+      ¶¶              ¶¶  ¶¶¶¶         ¶¶ 11                 ¶¶    ø¶¶¶      oø  ø  øo
+      ¶¢        7¶¶¶  1¶  ¶¶¶¶o        ¶¶ 11                 ¶7       ¶¶¶      1   1    1o
+     o¶         ¶¶¶¶¶  ¶¶  ¶¶o         ¶¶                 ¶¶¶¶¶¶¶       ¶¶¶7        1o¶¶¶ø
+      ¶          ¶¶¶   ¶¶¶            ¶¶¶¶                ¶¶¶¶¶¶¶         ¶¶¶¶¶¶¶¶  1
+      ¶¶              o¶ ¶¶¶        ¶¶¶  ¶¶             o¶¶¶¶¶¶¶¶¶ø                  o$¢
+    1  ¶¶            o¶7   ¶¶¶¶¶¶¶¶¶$     ¶$          ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶          ¢  1ø   1¶¶o  
+    1   ¶¶         $¶¶  11            111 1¶         ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶o       1$   ¶
+     1  ¶¶¶¶¶¶¶¶¶¶¶¶   111111111111111111  ¶        ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶       ¶    o¶ 
+    11 o¶   7¶¶ø     11111111111111111111  ¶        ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶     ¶¶
+    11 ¶¶  1     111111111111111    1717  ¶¶        ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+    11 ¶¶  11111111111111111111  $¶ø11   ¶¶         ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+    11  ¶¶  1111171      1111   ¶¶1    ¶¶¶          ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+    11  o¶ø  1171117¶¶¶¶7     ø¶1  ¢¶¶¶¶             ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ 
+    111  1¶¶7          ¢¶¶¶¶$¶¶¶¶¶¶¶o     11          ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ 
+    1111   o¶¶¶¶¶ø¢¢o¢¢ø¶¶¶¶¶¶o        11111            ¶¶¶¶¶¶¶¶¶¶¶¶ 
+    111111     17øøø¢¢o1          1111111111              ¶¶¶¶¶¶¶¶
+
+    =========================================================================
+    ============= Thank you for purchasing our BOT, powered by: =============
+    ========== Obrigado por comprar o nosso BOT,desenvolvido por ============
+    ========== Douglas Tanami, Guilherme Campos, Felipe Praxedes ============
+    =========================================================================
+    ======================== vvv BCOIN BUSD BNB vvv =========================
+    ============== 0xE793472F6000F01a509a99C5443a0B0FFcbEC5b1 ===============
+    =========================================================================
+    ===========================  Bomb é Lua  ================================
+    =========================================================================
+    >>---> Press ctrl + c to kill the bot.
+    >>---> Apertar ctrl + c para parar o bot.
+
+
+"""
+
+
 stream = open("config.yaml", 'r')
 c = yaml.safe_load(stream)
 ct = c['threshold']
@@ -174,7 +216,7 @@ def clickButtons():
     buttons = positions(images['go-work'], threshold=ct['go_to_work_btn'])
     # print('buttons: {}'.format(len(buttons)))
     for (x, y, w, h) in buttons:
-        moveToWithRandomness(x+(w/2),y+(h/2),1)
+        moveToWithRandomness(x+(w/2),y+(h/2),0.3)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
@@ -227,7 +269,7 @@ def clickGreenBarButtons():
     hero_clicks_cnt = 0
     for (x, y, w, h) in not_working_green_bars:
         # isWorking(y, buttons)
-        moveToWithRandomness(x+offset+(w/2),y+(h/2),1)
+        moveToWithRandomness(x+offset+(w/2),y+(h/2),0.3)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
@@ -252,7 +294,7 @@ def clickFullBarButtons():
         logger('👆 Clicking in %d heroes' % len(not_working_full_bars))
 
     for (x, y, w, h) in not_working_full_bars:
-        moveToWithRandomness(x+offset+(w/2),y+(h/2),1)
+        moveToWithRandomness(x+offset+(w/2),y+(h/2),0.3)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
@@ -428,6 +470,10 @@ def main():
     print('\n')
     time.sleep(7)
     t = c['time_intervals']
+
+    print(frogbomb)
+    time.sleep(7)
+    t = c ['time_intervals']
 
     last = {
     "login" : 0,
