@@ -11,9 +11,15 @@ import time
 import sys
 import yaml
 
+# Load config file.
+stream = open("config.yaml", 'r')
+c = yaml.safe_load(stream)
+ct = c['threshold']
+ch = c['home']
+pause = c['time_intervals']['interval_between_moviments']
+pyautogui.PAUSE = pause
 
 frogbomb = """
-
     1111111111111111 11   1¶¶¶¶¶¶¶¶7   11111           
     11111            1  ø¶¶7       ¶¶¶   111
     111    ø¶¶¶¶¶¶¶1   ¶¶            ¶¶  111
@@ -47,18 +53,13 @@ frogbomb = """
     ===========================  Bomb é Lua  ================================
     =========================================================================
     >>---> Press ctrl + c to kill the bot.
-    >>---> Apertar ctrl + c para parar o bot.
+    >>---> Apertar ctrl + c para parar o bot."""
 
 
-"""
 
 
-stream = open("config.yaml", 'r')
-c = yaml.safe_load(stream)
-ct = c['threshold']
-ch = c['home']
-pause = c['time_intervals']['interval_between_moviments']
-pyautogui.PAUSE = pause
+
+
 
 def addRandomness(n, randomn_factor_size=None):
     """Returns n with randomness
@@ -66,7 +67,6 @@ def addRandomness(n, randomn_factor_size=None):
         n (int): A decimal integer
         randomn_factor_size (int): The maximum value+- of randomness that will be
             added to n
-
     Returns:
         int: n with randomness
     """
@@ -97,7 +97,6 @@ def remove_suffix(input_string, suffix):
 def load_images(dir_path='./targets/'):
     """ Programatically loads all images of dir_path as a key:value where the
         key is the file name without the .png suffix
-
     Returns:
         dict: dictionary containing the loaded images as key:value pairs.
     """
@@ -142,6 +141,10 @@ def show(rectangles, img = None):
     cv2.imshow('img',img)
     cv2.waitKey(0)
 
+
+
+
+
 def clickBtn(img, timeout=3, threshold = ct['default']):
     """Search for img in the scree, if found moves the cursor over it and clicks.
     Parameters:
@@ -163,13 +166,13 @@ def clickBtn(img, timeout=3, threshold = ct['default']):
         x,y,w,h = matches[0]
         pos_click_x = x+w/2
         pos_click_y = y+h/2
-        moveToWithRandomness(pos_click_x,pos_click_y,1)
+        moveToWithRandomness(pos_click_x,pos_click_y,0.7)
         pyautogui.click()
         return True
 
     return False
 
-def printScreen():
+def printSreen():
     with mss.mss() as sct:
         monitor = sct.monitors[0]
         sct_img = np.array(sct.grab(monitor))
@@ -181,7 +184,7 @@ def printScreen():
 
 def positions(target, threshold=ct['default'],img = None):
     if img is None:
-        img = printScreen()
+        img = printSreen()
     result = cv2.matchTemplate(img,target,cv2.TM_CCOEFF_NORMED)
     w = target.shape[1]
     h = target.shape[0]
@@ -216,7 +219,7 @@ def clickButtons():
     buttons = positions(images['go-work'], threshold=ct['go_to_work_btn'])
     # print('buttons: {}'.format(len(buttons)))
     for (x, y, w, h) in buttons:
-        moveToWithRandomness(x+(w/2),y+(h/2),0.3)
+        moveToWithRandomness(x+(w/2),y+(h/2),0.7)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
@@ -269,7 +272,7 @@ def clickGreenBarButtons():
     hero_clicks_cnt = 0
     for (x, y, w, h) in not_working_green_bars:
         # isWorking(y, buttons)
-        moveToWithRandomness(x+offset+(w/2),y+(h/2),0.3)
+        moveToWithRandomness(x+offset+(w/2),y+(h/2),0.7)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
@@ -294,7 +297,7 @@ def clickFullBarButtons():
         logger('👆 Clicking in %d heroes' % len(not_working_full_bars))
 
     for (x, y, w, h) in not_working_full_bars:
-        moveToWithRandomness(x+offset+(w/2),y+(h/2),0.3)
+        moveToWithRandomness(x+offset+(w/2),y+(h/2),1)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
@@ -341,16 +344,16 @@ def login():
     if clickBtn(images['connect-wallet'], timeout = 10):
         logger('🎉 Connect wallet button detected, logging in!')
         login_attempts = login_attempts + 1
-        #TODO mto ele da erro e poco o botão n abre
+        #TODO mto ele da erro e poco o botao n abre
         # time.sleep(10)
 
     if clickBtn(images['select-wallet-2'], timeout=8):
-        # sometimes the sign popup appears immediately
+        # sometimes the sign popup appears imediately
         login_attempts = login_attempts + 1
         # print('sign button clicked')
         # print('{} login attempt'.format(login_attempts))
         if clickBtn(images['treasure-hunt-icon'], timeout = 15):
-            # print('successfully login, treasure hunt btn clicked')
+            # print('sucessfully login, treasure hunt btn clicked')
             login_attempts = 0
         return
         # click ok button
@@ -372,7 +375,7 @@ def login():
         # print('{} login attempt'.format(login_attempts))
         # time.sleep(25)
         if clickBtn(images['treasure-hunt-icon'], timeout=25):
-            # print('successfully login, treasure hunt btn clicked')
+            # print('sucessfully login, treasure hunt btn clicked')
             login_attempts = 0
         # time.sleep(15)
 
@@ -415,6 +418,10 @@ def sendHeroesHome():
                 print ('hero working, not sending him home(no dark work button)')
         else:
             print('hero already home, or home full(no dark home button)')
+
+
+
+
 
 def refreshHeroes():
     logger('🏢 Search for heroes to work')
@@ -468,12 +475,10 @@ def main():
     else:
         print('>>---> Home feature not enabled')
     print('\n')
-    time.sleep(7)
-    t = c['time_intervals']
 
     print(frogbomb)
     time.sleep(7)
-    t = c ['time_intervals']
+    t = c['time_intervals']
 
     last = {
     "login" : 0,
@@ -531,5 +536,3 @@ if __name__ == '__main__':
 
 # colocar o botao em pt
 # soh resetar posiçoes se n tiver clickado em newmap em x segundos
-
-
