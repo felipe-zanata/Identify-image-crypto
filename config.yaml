@@ -85,7 +85,7 @@
     #
     # [pt_BR]
     # Valor padrão: 0.9
-    green_bar: 0.8
+    green_bar: 0.7
 
   home:
     enable: False
@@ -121,7 +121,7 @@
   #
   # [pt_BR]
   # Valor padrão: 200
-  click_and_drag_amount: 200
+  click_and_drag_amount: 250
 
   # [en_US]
   # Default value: green

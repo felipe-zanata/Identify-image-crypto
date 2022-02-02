@@ -162,19 +162,19 @@ def scroll():
         return
     x,y,w,h = commoms[len(commoms)-1]
 #
-    moveToWithRandomness(x,y,1)
+    moveToWithRandomness(x,y,0.7)
 
     if not c['use_click_and_drag_instead_of_scroll']:
         pyautogui.scroll(-c['scroll_size'])
     else:
-        pyautogui.dragRel(0,-c['click_and_drag_amount'],duration=1, button='left')
+        pyautogui.dragRel(0,-c['click_and_drag_amount'],duration=0.5, button='left')
 
 
 def clickButtons():
     buttons = positions(images['go-work'], threshold=ct['go_to_work_btn'])
     # print('buttons: {}'.format(len(buttons)))
     for (x, y, w, h) in buttons:
-        moveToWithRandomness(x+(w/2),y+(h/2),1)
+        moveToWithRandomness(x+(w/2),y+(h/2),0.5)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
@@ -206,7 +206,6 @@ def isWorking(bar, buttons):
     return True
 
 def clickGreenBarButtons():
-    # ele clicka nos q tao trabaiano mas axo q n importa
     offset = 140
 
     green_bars = positions(images['green-bar'], threshold=ct['green_bar'])
@@ -252,7 +251,7 @@ def clickFullBarButtons():
         logger('👆 Clicking in %d heroes' % len(not_working_full_bars))
 
     for (x, y, w, h) in not_working_full_bars:
-        moveToWithRandomness(x+offset+(w/2),y+(h/2),1)
+        moveToWithRandomness(x+offset+(w/2),y+(h/2),0.5)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
