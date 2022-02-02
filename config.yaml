@@ -17,7 +17,7 @@
     #
     # [pt_BR] Intervalo de tempo para atualizar a posição dos heróis no mapa
     # Valor padrão (em minutos): 3
-    refresh_heroes_positions: 3
+    refresh_heroes_positions: 5
     
     # [en_US] Time interval to check for new maps
     # Default value (in minutes): 5 
@@ -64,28 +64,28 @@
     #
     # [pt_BR]
     # Valor padrão: 0.8
-    commom: 0.8
+    commom: 0.7
 
     # [en_US]
     # Default value: 0.8
     #
     # [pt_BR]
     # Valor padrão: 0.8
-    select_wallet_buttons: 0.8
+    select_wallet_buttons: 0.7
 
     # [en_US]
     # Default value: 0.9
     #
     # [pt_BR]
     # Valor padrão: 0.9
-    go_to_work_btn: 0.9
+    go_to_work_btn: 0.8
 
     # [en_US]
     # Default value: 0.9
     #
     # [pt_BR]
     # Valor padrão: 0.9
-    green_bar: 0.9
+    green_bar: 0.8
 
   home:
     enable: False
