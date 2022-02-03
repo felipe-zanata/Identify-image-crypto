@@ -18,6 +18,49 @@ ch = c['home']
 pause = c['time_intervals']['interval_between_moviments']
 pyautogui.PAUSE = pause
 
+frogbomb = """
+    1111111111111111 11   1¶¶¶¶¶¶¶¶7   11111           
+    11111            1  ø¶¶7       ¶¶¶   111
+    111    ø¶¶¶¶¶¶¶1   ¶¶            ¶¶  111
+    11  1¶¶¶7     ø¶¶7 ¶              ¶¶  11                              $¶     ¶     ¶¢
+    1  ¶¶ø          1¶¶¶               ¶¶ 11                  ¶¶¶¶¶¶¶       ¶¢   ¶   ø¶
+      ¶¶              ¶¶  ¶¶¶¶         ¶¶ 11                 ¶¶    ø¶¶¶      oø  ø  øo
+      ¶¢        7¶¶¶  1¶  ¶¶¶¶o        ¶¶ 11                 ¶7       ¶¶¶      1   1    1o
+     o¶         ¶¶¶¶¶  ¶¶  ¶¶o         ¶¶                 ¶¶¶¶¶¶¶       ¶¶¶7        1o¶¶¶ø
+      ¶          ¶¶¶   ¶¶¶            ¶¶¶¶                ¶¶¶¶¶¶¶         ¶¶¶¶¶¶¶¶  1
+      ¶¶              o¶ ¶¶¶        ¶¶¶  ¶¶             o¶¶¶¶¶¶¶¶¶ø                  o$¢
+    1  ¶¶            o¶7   ¶¶¶¶¶¶¶¶¶$     ¶$          ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶          ¢  1ø   1¶¶o  
+    1   ¶¶         $¶¶  11            111 1¶         ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶o       1$   ¶
+     1  ¶¶¶¶¶¶¶¶¶¶¶¶   111111111111111111  ¶        ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶       ¶    o¶ 
+    11 o¶   7¶¶ø     11111111111111111111  ¶        ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶     ¶¶
+    11 ¶¶  1     111111111111111    1717  ¶¶        ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+    11 ¶¶  11111111111111111111  $¶ø11   ¶¶         ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+    11  ¶¶  1111171      1111   ¶¶1    ¶¶¶          ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶
+    11  o¶ø  1171117¶¶¶¶7     ø¶1  ¢¶¶¶¶             ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ 
+    111  1¶¶7          ¢¶¶¶¶$¶¶¶¶¶¶¶o     11          ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ 
+    1111   o¶¶¶¶¶ø¢¢o¢¢ø¶¶¶¶¶¶o        11111            ¶¶¶¶¶¶¶¶¶¶¶¶ 
+    111111     17øøø¢¢o1          1111111111              ¶¶¶¶¶¶¶¶
+
+    =========================================================================
+    ============= Thank you for purchasing our BOT, powered by: =============
+    ========== Obrigado por comprar o nosso BOT,desenvolvido por ============
+    ========== Douglas Tanami, Guilherme Campos, Felipe Praxedes ============
+    =========================================================================
+    ======================== vvv BCOIN BUSD BNB vvv =========================
+    ============== 0xE793472F6000F01a509a99C5443a0B0FFcbEC5b1 ===============
+    =========================================================================
+    ===========================  Bomb é Lua  ================================
+    =========================================================================
+    >>---> Press ctrl + c to kill the bot.
+    >>---> Apertar ctrl + c para parar o bot."""
+
+
+
+
+
+
+
+
 def addRandomness(n, randomn_factor_size=None):
     """Returns n with randomness
     Parameters:
@@ -231,9 +274,12 @@ def clickGreenBarButtons():
         global hero_clicks
         hero_clicks = hero_clicks + 1
         hero_clicks_cnt = hero_clicks_cnt + 1
-        if hero_clicks_cnt > 4:
+        if hero_clicks_cnt > 5:
             goToGame()
             logger('⚠️ Too many hero clicks, try to increase the go_to_work_btn threshold')
+            return len(not_working_green_bars)
+        if hero_clicks >7:
+            goToGame()
             return len(not_working_green_bars)
         #cv2.rectangle(sct_img, (x, y) , (x + w, y + h), (0,255,255),2)
     return len(not_working_green_bars)
@@ -426,6 +472,7 @@ def main():
     else:
         print('>>---> Home feature not enabled')
     print('\n')
+    print(frogbomb)
     time.sleep(5)
     t = c['time_intervals']
 

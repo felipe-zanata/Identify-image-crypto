@@ -231,12 +231,9 @@ def clickGreenBarButtons():
         global hero_clicks
         hero_clicks = hero_clicks + 1
         hero_clicks_cnt = hero_clicks_cnt + 1
-        if hero_clicks_cnt > 5:
+        if hero_clicks_cnt > 4:
             goToGame()
             logger('⚠️ Too many hero clicks, try to increase the go_to_work_btn threshold')
-            return len(not_working_green_bars)
-        if hero_clicks >7:
-            goToGame()
             return len(not_working_green_bars)
         #cv2.rectangle(sct_img, (x, y) , (x + w, y + h), (0,255,255),2)
     return len(not_working_green_bars)
