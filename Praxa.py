@@ -11,6 +11,7 @@ import time
 import sys
 import yaml
 
+# coment
 stream = open("config.yaml", 'r')
 c = yaml.safe_load(stream)
 ct = c['threshold']
